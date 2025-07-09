@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { createApiUrl } from '../context/AuthContext';
 
 const Incontri = () => {
   const [incontri, setIncontri] = useState([]);
@@ -13,9 +14,9 @@ const Incontri = () => {
   useEffect(() => {
     const fetchIncontri = async () => {
       try {
-        const res = await fetch('/api/incontri', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await fetch(createApiUrl('/api/incontri'), {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
         if (res.status === 403) {
           setError('Devi essere iscritto al torneo per visualizzare gli incontri');

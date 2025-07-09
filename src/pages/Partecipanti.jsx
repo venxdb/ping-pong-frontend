@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { createApiUrl } from '../context/AuthContext';
 
 const Partecipanti = () => {
   const [partecipanti, setPartecipanti] = useState([]);
@@ -12,7 +13,7 @@ const Partecipanti = () => {
   useEffect(() => {
     const fetchPartecipanti = async () => {
       try {
-        const res = await fetch('/api/partecipanti', {
+        const res = await fetch(createApiUrl('/api/partecipanti'), {
           headers: { Authorization: `Bearer ${token}` },
         });
 

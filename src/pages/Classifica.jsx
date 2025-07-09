@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { createApiUrl } from '../context/AuthContext';
+
 
 const Classifica = () => {
   const [classifica, setClassifica] = useState([]);
@@ -9,9 +11,9 @@ const Classifica = () => {
   useEffect(() => {
     const fetchClassifica = async () => {
       try {
-        const res = await fetch('/api/classifica', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await fetch(createApiUrl('/api/classifica'), {
+        headers: { Authorization: `Bearer ${token}` }
+      });
         
         if (res.ok) {
           const data = await res.json();
