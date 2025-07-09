@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';  // ← CORRETTO
+import { createApiUrl } from '../config/api';       // ← AGGIUNTO
 
 const GestioneIncontri = () => {
   const [incontri, setIncontri] = useState([]);
@@ -24,10 +25,10 @@ const GestioneIncontri = () => {
   const fetchData = async () => {
     try {
       const [incontriRes, partecipantiRes] = await Promise.all([
-        fetch('/api/incontri', {
+        fetch(createApiUrl('/api/incontri'), {  // ← CORRETTO
           headers: { Authorization: `Bearer ${token}` }
         }),
-        fetch('/api/partecipanti', {
+        fetch(createApiUrl('/api/partecipanti'), {  // ← CORRETTO
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -106,7 +107,7 @@ const GestioneIncontri = () => {
       const url = editingId ? `/api/incontri/${editingId}` : '/api/incontri';
       const method = editingId ? 'PUT' : 'POST';
 
-      const res = await fetch(url, {
+      const res = await fetch(createApiUrl(url), {  // ← CORRETTO
         method,
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -148,7 +149,7 @@ const GestioneIncontri = () => {
     if (!window.confirm('Sei sicuro di voler eliminare questo incontro?')) return;
 
     try {
-      const res = await fetch(`/api/incontri/${id}`, {
+      const res = await fetch(createApiUrl(`/api/incontri/${id}`), {  // ← CORRETTO
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

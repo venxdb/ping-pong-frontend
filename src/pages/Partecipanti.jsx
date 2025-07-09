@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { createApiUrl } from '../context/AuthContext';
+import { createApiUrl } from '../config/api';
 
 const Partecipanti = () => {
   const [partecipanti, setPartecipanti] = useState([]);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';  // ← CORRETTO
+import { createApiUrl } from '../config/api';       // ← AGGIUNTO
 
 export default function Dashboard() {
   const { userDetails, token, updateUserDetails } = useAuth();
@@ -10,7 +11,7 @@ export default function Dashboard() {
   const handleIscrizioneTorneo = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/torneo/iscriviti', {
+      const res = await fetch(createApiUrl('/api/torneo/iscriviti'), {  // ← CORRETTO
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,
@@ -35,7 +36,7 @@ export default function Dashboard() {
   const handleDiventaOrganizzatore = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/torneo/sono-un-organizzatore', {
+      const res = await fetch(createApiUrl('/api/torneo/sono-un-organizzatore'), {  // ← CORRETTO
         method: 'POST',
         headers: { 
           'Authorization': `Bearer ${token}`,
