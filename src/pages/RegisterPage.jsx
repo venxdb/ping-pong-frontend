@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { createApiUrl } from "../config/api";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({ nome: "", cognome: "", email: "", password: "" });
@@ -17,7 +18,7 @@ const RegisterPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/utenti/register", {
+      const res = await fetch(createApiUrl("/api/utenti/register"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
